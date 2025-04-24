@@ -5,9 +5,9 @@ import Link from 'next/link'
 
 const navigation = [
   { name: 'Inicio', href: 'https://scplasenciac.github.io/fitmatch_v1' },
-  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1/services' },
-  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1/how-it-works' },
-  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1/health-tips' },
+  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1#servicios' },
+  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1#como-funciona' },
+  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1#tips' },
 ]
 
 export default function Footer() {

@@ -6,9 +6,9 @@ import { HiMenu, HiX } from 'react-icons/hi'
 
 const navigation = [
   { name: 'Inicio', href: 'https://scplasenciac.github.io/fitmatch_v1' },
-  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1/services' },
-  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1/how-it-works' },
-  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1/health-tips' },
+  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1#servicios' },
+  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1#como-funciona' },
+  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1#tips' },
 ]
 
 export default function Header() {
@@ -76,28 +76,26 @@ export default function Header() {
                 <HiX className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={(e) => handleNavigation(e, item.href)}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-                <div className="py-6">
+            <div className="mt-6">
+              <div className="space-y-2 py-6">
+                {navigation.map((item) => (
                   <Link
-                    href="https://scplasenciac.github.io/fitmatch_v1/contact"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavigation(e, item.href)}
+                    className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
                   >
-                    Únete como partner
+                    {item.name}
                   </Link>
-                </div>
+                ))}
+              </div>
+              <div className="py-6">
+                <Link
+                  href="https://scplasenciac.github.io/fitmatch_v1/contact"
+                  className="block px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
+                >
+                  Únete como partner
+                </Link>
               </div>
             </div>
           </div>
