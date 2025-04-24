@@ -57,7 +57,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <img
-              src="https://scplasenciac.github.io/fitmatch_v1/sports-collage.jpg"
+              src="/fitmatch_v1/sports-collage.jpg"
               alt="Collage de deportes"
               className="w-full h-auto rounded-2xl shadow-xl"
             />
