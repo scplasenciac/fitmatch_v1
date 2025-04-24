@@ -40,7 +40,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Link
-              href="/search"
+              href="https://scplasenciac.github.io/fitmatch_v1/search"
               className="rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
             >
               Busca ahora
@@ -59,7 +59,7 @@ export default function Hero() {
             <img
               src="/sports-collage.jpg"
               alt="Collage de deportes"
-              className="w-full rounded-md bg-white/5 shadow-2xl ring-1 ring-gray-900/10"
+              className="w-full h-auto rounded-2xl shadow-xl"
             />
           </motion.div>
         </div>

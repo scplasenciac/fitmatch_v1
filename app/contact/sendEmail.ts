@@ -1,8 +1,6 @@
-'use server'
+'use client'
 
-import nodemailer from 'nodemailer'
-
-interface FormData {
+interface ContactFormData {
   name: string
   email: string
   phone: string
@@ -10,44 +8,28 @@ interface FormData {
   message: string
 }
 
-export async function sendEmail(formData: FormData) {
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASSWORD
-    }
-  })
-
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: 'sebastianplasencia313@gmail.com',
-    subject: `Nueva solicitud de partner: ${formData.business}`,
-    text: `
-      Nombre: ${formData.name}
-      Email: ${formData.email}
-      Teléfono: ${formData.phone}
-      Negocio: ${formData.business}
-      
-      Mensaje:
-      ${formData.message}
-    `,
-    html: `
-      <h2>Nueva solicitud de partner</h2>
-      <p><strong>Negocio:</strong> ${formData.business}</p>
-      <p><strong>Nombre:</strong> ${formData.name}</p>
-      <p><strong>Email:</strong> ${formData.email}</p>
-      <p><strong>Teléfono:</strong> ${formData.phone}</p>
-      <h3>Mensaje:</h3>
-      <p>${formData.message}</p>
-    `
-  }
-
+export async function sendEmail(formData: ContactFormData) {
   try {
-    await transporter.sendMail(mailOptions)
-    return { success: true }
+    const response = await fetch('https://formspree.io/f/xpzvgwnj', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formData,
+        _replyto: formData.email,
+        _subject: `Nueva solicitud de partner: ${formData.business}`,
+        _to: 'sebastianplasencia313@gmail.com'
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
+
+    return { success: true };
   } catch (error) {
-    console.error('Error sending email:', error)
-    throw new Error('Failed to send email')
+    console.error('Error sending message:', error);
+    return { success: false, error: 'Failed to send message' };
   }
 } 

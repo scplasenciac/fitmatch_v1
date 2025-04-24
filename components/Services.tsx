@@ -9,21 +9,21 @@ const services = [
     title: 'Alquiler de canchas',
     description: 'Encuentra y reserva canchas deportivas cerca de ti para practicar tus deportes favoritos.',
     icon: '🏟️',
-    href: '/search?type=alquileres&tags=functional-training-musculacion-pesas&sort=latest',
+    href: 'https://scplasenciac.github.io/fitmatch_v1/search?type=alquileres&tags=functional-training-musculacion-pesas&sort=latest',
   },
   {
     id: 2,
     title: 'Clases deportivas',
     description: 'Accede a clases personalizadas con instructores profesionales en diversos deportes.',
     icon: '🏋️‍♂️',
-    href: '/search?type=clases',
+    href: 'https://scplasenciac.github.io/fitmatch_v1/search?type=clases',
   },
   {
     id: 3,
     title: 'Eventos deportivos',
     description: 'Participa en torneos y eventos deportivos organizados por nuestra comunidad.',
     icon: '🏆',
-    href: '/search?type=eventos',
+    href: 'https://scplasenciac.github.io/fitmatch_v1/search?type=eventos',
   },
 ]
 

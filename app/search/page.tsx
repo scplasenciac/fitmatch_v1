@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, Suspense } from 'react'
 import Header from '@/components/Header'
 import { useSearchParams } from 'next/navigation'
 
@@ -16,6 +16,14 @@ interface Activity {
 }
 
 export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchContent />
+    </Suspense>
+  )
+}
+
+function SearchContent() {
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
   const tags = searchParams.get('tags')

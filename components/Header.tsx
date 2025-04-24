@@ -5,36 +5,25 @@ import Link from 'next/link'
 import { HiMenu, HiX } from 'react-icons/hi'
 
 const navigation = [
-  { name: 'Inicio', href: '/' },
-  { name: 'Servicios', href: '#servicios' },
-  { name: 'Cómo funciona', href: '#como-funciona' },
-  { name: 'Tips saludables', href: '#tips' },
+  { name: 'Inicio', href: 'https://scplasenciac.github.io/fitmatch_v1' },
+  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1/services' },
+  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1/how-it-works' },
+  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1/health-tips' },
 ]
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
-    
-    // If it's the home link, just navigate to the root
-    if (href === '/') {
-      window.location.href = '/'
-      return
-    }
-
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setMobileMenuOpen(false)
-    }
+    window.location.href = href
   }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-sm">
       <nav className="container flex items-center justify-between py-6" aria-label="Global">
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
+          <Link href="https://scplasenciac.github.io/fitmatch_v1" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
             FitMatch
           </Link>
         </div>
@@ -53,7 +42,7 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              onClick={(e) => handleScroll(e, item.href)}
+              onClick={(e) => handleNavigation(e, item.href)}
               className="text-sm font-semibold leading-6 text-gray-900 hover:text-primary-700"
             >
               {item.name}
@@ -62,7 +51,7 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
-            href="/contact"
+            href="https://scplasenciac.github.io/fitmatch_v1/contact"
             className="rounded-full bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-600"
           >
             Únete como partner
@@ -75,7 +64,7 @@ export default function Header() {
           <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" aria-hidden="true" />
           <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <Link href="/" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
+              <Link href="https://scplasenciac.github.io/fitmatch_v1" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
                 FitMatch
               </Link>
               <button
@@ -94,7 +83,7 @@ export default function Header() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      onClick={(e) => handleScroll(e, item.href)}
+                      onClick={(e) => handleNavigation(e, item.href)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       {item.name}
@@ -103,7 +92,7 @@ export default function Header() {
                 </div>
                 <div className="py-6">
                   <Link
-                    href="/contact"
+                    href="https://scplasenciac.github.io/fitmatch_v1/contact"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Únete como partner
