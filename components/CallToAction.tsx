@@ -4,7 +4,7 @@ import Link from 'next/link'
 export default function CallToAction() {
   return (
     <section className="section-padding relative">
-      <div className="absolute inset-0 w-full h-full bg-[url('/listoparacomenzar.jpg')] bg-cover bg-center z-0" />
+      <div className="absolute inset-0 w-full h-full bg-[url('/fitmatch_v1/listoparacomenzar.jpg')] bg-cover bg-center z-0" />
       <div className="absolute inset-0 w-full h-full bg-white/80 z-10" />
       <div className="container relative z-20">
         <div className="relative isolate overflow-hidden px-6 py-16 shadow-2xl sm:rounded-3xl sm:px-16 animate-fade-in-up text-center">
