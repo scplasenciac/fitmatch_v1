@@ -17,7 +17,11 @@ export default function Hero() {
           >
             Encuentra
             <br />
-            <span className="text-red-600">canchas, clases, eventos deportivos</span>
+            <span className="text-red-600">canchas,</span>
+            <br />
+            <span className="text-red-600">clases,</span>
+            <br />
+            <span className="text-red-600">eventos</span>
             <br />
             y mejora tu salud
           </motion.h1>
