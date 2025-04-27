@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import BlinkingText from './BlinkingText'
 
 export default function Hero() {
   return (
@@ -17,13 +18,13 @@ export default function Hero() {
           >
             Encuentra
             <br />
-            <span className="text-red-600">canchas</span>
+            <span className="text-primary-700">
+              <BlinkingText />
+            </span>
             <br />
-            <span className="text-red-600">clases</span>
+            y mejora
             <br />
-            <span className="text-red-600">eventos deportivos</span>
-            <br />
-            y mejora tu salud
+            tu salud
           </motion.h1>
           <motion.p 
             className="mt-6 text-lg leading-8 text-gray-600"
