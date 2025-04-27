@@ -21,7 +21,7 @@ export default function Hero() {
             <br />
             <span className="text-red-600">clases,</span>
             <br />
-            <span className="text-red-600">eventos</span>
+            <span className="text-red-600">eventos deportivos</span>
             <br />
             y mejora tu salud
           </motion.h1>
