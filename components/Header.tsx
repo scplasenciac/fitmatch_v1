@@ -21,7 +21,7 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-sm">
-      <nav className="container flex items-center justify-between py-6" aria-label="Global">
+      <nav className="container mx-auto flex items-center justify-between py-6 px-4" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="https://scplasenciac.github.io/fitmatch_v1" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
             FitMatch
@@ -30,7 +30,7 @@ export default function Header() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:bg-gray-100"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Abrir menú principal</span>
@@ -60,8 +60,12 @@ export default function Header() {
       </nav>
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <>
-          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm" aria-hidden="true" />
+        <div className="fixed inset-0 z-50">
+          <div 
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm" 
+            aria-hidden="true" 
+            onClick={() => setMobileMenuOpen(false)}
+          />
           <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <Link href="https://scplasenciac.github.io/fitmatch_v1" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
@@ -78,28 +82,47 @@ export default function Header() {
             </div>
             <div className="mt-6">
               <div className="space-y-2 py-6">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={(e) => handleNavigation(e, item.href)}
-                    className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                <Link
+                  href="https://scplasenciac.github.io/fitmatch_v1"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
+                >
+                  Inicio
+                </Link>
+                <Link
+                  href="https://scplasenciac.github.io/fitmatch_v1#servicios"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
+                >
+                  Servicios
+                </Link>
+                <Link
+                  href="https://scplasenciac.github.io/fitmatch_v1#como-funciona"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
+                >
+                  Cómo funciona
+                </Link>
+                <Link
+                  href="https://scplasenciac.github.io/fitmatch_v1#tips"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
+                >
+                  Tips saludables
+                </Link>
               </div>
               <div className="py-6">
                 <Link
                   href="https://scplasenciac.github.io/fitmatch_v1/contact"
-                  className="block px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full rounded-full bg-primary-700 px-4 py-2.5 text-center text-base font-semibold text-white shadow-sm hover:bg-primary-600"
                 >
                   Únete como partner
                 </Link>
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </header>
   )
