@@ -3,32 +3,21 @@ import Link from 'next/link'
 
 export default function CallToAction() {
   return (
-    <section className="section-padding">
-      <div className="container">
-        <div className="relative isolate overflow-hidden bg-primary-100 px-6 py-16 shadow-2xl sm:rounded-3xl sm:px-16 animate-fade-in-up">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* USUARIOS */}
-            <div>
-              <h2 className="text-2xl font-bold text-primary-900 mb-4 text-center md:text-left">USUARIOS</h2>
-              <ul className="text-primary-900 text-base space-y-2">
-                <li><span className="font-bold">• FREE</span><br /><span className="ml-4">✓ Búsqueda y reserva en directorio</span></li>
-                <li><span className="font-bold">• MENSUAL S/9.99</span></li>
-                <li className="ml-4">✓ Funciones Plan Freemium</li>
-                <li className="ml-4">✓ Recomendaciones avanzadas: <br className="md:hidden"/>Personalización mejorada basada en intereses más detallados.</li>
-                <li className="ml-4">✓ Entradas con descuento: <br className="md:hidden"/>Acceso a descuentos exclusivos en eventos seleccionados.</li>
-                <li className="ml-4">✓ Comunidad</li>
-              </ul>
-            </div>
-            {/* DUEÑOS DE NEGOCIO */}
-            <div>
-              <h2 className="text-2xl font-bold text-primary-900 mb-4 text-center md:text-left">DUEÑOS DE NEGOCIO</h2>
-              <ul className="text-primary-900 text-base space-y-2">
-                <li><span className="font-bold">• FREE</span><br /><span className="ml-4">✓ Registro y visibilidad en directorio</span></li>
-                <li className="ml-4">✓ Acceso completo a publicación de eventos</li>
-                <li><span className="font-bold">• FEE</span><br /><span className="ml-4">✓ 10% comisión por reserva</span></li>
-              </ul>
-            </div>
-          </div>
+    <section className="section-padding relative">
+      <div className="absolute inset-0 w-full h-full bg-[url('/listoparacomenzar.jpg')] bg-cover bg-center z-0" />
+      <div className="absolute inset-0 w-full h-full bg-white/80 z-10" />
+      <div className="container relative z-20">
+        <div className="relative isolate overflow-hidden px-6 py-16 shadow-2xl sm:rounded-3xl sm:px-16 animate-fade-in-up text-center">
+          <h2 className="text-3xl font-bold text-primary-900 mb-6">¿Listo para comenzar?</h2>
+          <p className="text-lg text-primary-800 mb-8">
+            Únete a nuestra comunidad deportiva y descubre todas las oportunidades que tenemos para ti.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block rounded-full bg-primary-700 px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 transition-colors"
+          >
+            Contáctanos ahora
+          </Link>
         </div>
       </div>
     </section>
