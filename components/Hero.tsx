@@ -17,11 +17,7 @@ export default function Hero() {
           >
             Encuentra
             <br />
-            <span className="text-primary-700">canchas deportivas</span>
-            <br />
-            <span className="text-primary-700">clases deportivas</span>
-            <br />
-            <span className="text-primary-700">eventos deportivos</span>
+            <span className="text-red-600">canchas, clases, eventos deportivos</span>
             <br />
             y mejora tu salud
           </motion.h1>
