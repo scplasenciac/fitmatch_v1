@@ -22,9 +22,7 @@ export default function Hero() {
               <BlinkingText />
             </span>
             <br />
-            y mejora
-            <br />
-            tu salud
+            y mejora tu salud
           </motion.h1>
           <motion.p 
             className="mt-6 text-lg leading-8 text-gray-600"
