@@ -2,13 +2,13 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { HiMenu, HiX } from 'react-icons/hi'
+import { HiMenu, HiX, HiHome, HiBriefcase, HiLightBulb, HiHeart } from 'react-icons/hi'
 
 const navigation = [
-  { name: 'Inicio', href: 'https://scplasenciac.github.io/fitmatch_v1' },
-  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1#servicios' },
-  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1#como-funciona' },
-  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1#tips' },
+  { name: 'Inicio', href: 'https://scplasenciac.github.io/fitmatch_v1', icon: HiHome },
+  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1#servicios', icon: HiBriefcase },
+  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1#como-funciona', icon: HiLightBulb },
+  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1#tips', icon: HiHeart },
 ]
 
 export default function Header() {
@@ -66,61 +66,39 @@ export default function Header() {
             aria-hidden="true" 
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div className="flex items-center justify-between">
-              <Link href="https://scplasenciac.github.io/fitmatch_v1" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
-                FitMatch
-              </Link>
+          <div className="fixed top-0 right-0 z-50 w-72 max-w-full h-screen overflow-y-auto bg-white p-0 sm:ring-1 sm:ring-gray-900/10 shadow-2xl">
+            {/* Encabezado del menú */}
+            <div className="flex items-center justify-between bg-primary-700 px-4 py-3">
+              <span className="text-xl font-bold text-white">Menú</span>
               <button
                 type="button"
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                className="rounded-md p-2 text-white hover:bg-primary-600"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Cerrar menú</span>
                 <HiX className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            <div className="mt-6">
-              <div className="space-y-2 py-6">
-                <Link
-                  href="https://scplasenciac.github.io/fitmatch_v1"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
-                >
-                  Inicio
-                </Link>
-                <Link
-                  href="https://scplasenciac.github.io/fitmatch_v1#servicios"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
-                >
-                  Servicios
-                </Link>
-                <Link
-                  href="https://scplasenciac.github.io/fitmatch_v1#como-funciona"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
-                >
-                  Cómo funciona
-                </Link>
-                <Link
-                  href="https://scplasenciac.github.io/fitmatch_v1#tips"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 rounded-lg"
-                >
-                  Tips saludables
-                </Link>
-              </div>
-              <div className="py-6">
-                <Link
-                  href="https://scplasenciac.github.io/fitmatch_v1/contact"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full rounded-full bg-primary-700 px-4 py-2.5 text-center text-base font-semibold text-white shadow-sm hover:bg-primary-600"
-                >
-                  Únete como partner
-                </Link>
-              </div>
-            </div>
+            {/* Opciones */}
+            <nav className="bg-primary-900 divide-y divide-primary-700 h-full">
+              {navigation.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      handleNavigation(e, item.href);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center px-4 py-3 text-base font-semibold text-white hover:bg-primary-700 transition-colors"
+                  >
+                    <Icon className="mr-3 text-lg" />
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
         </div>
       )}

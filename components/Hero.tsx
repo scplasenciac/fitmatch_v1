@@ -21,8 +21,9 @@ export default function Hero() {
             <span className="text-primary-700">
               <BlinkingText />
             </span>
-            <br />
-            y mejora tu salud
+            <span className="mt-1 block">
+              y mejora tu salud
+            </span>
           </motion.h1>
           <motion.p 
             className="mt-6 text-lg leading-8 text-gray-600"
@@ -39,10 +40,10 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Link
-              href="https://scplasenciac.github.io/fitmatch_v1/search"
+              href="#planes"
               className="rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
             >
-              Busca ahora
+              Únete a nuestra comunidad
             </Link>
           </motion.div>
         </div>

@@ -10,17 +10,12 @@ interface ContactFormData {
 
 export async function sendEmail(formData: ContactFormData) {
   try {
-    const response = await fetch('https://formspree.io/f/xpzvgwnj', {
+    const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        ...formData,
-        _replyto: formData.email,
-        _subject: `Nueva solicitud de partner: ${formData.business}`,
-        _to: 'sebastianplasencia313@gmail.com'
-      }),
+      body: JSON.stringify(formData),
     });
 
     if (!response.ok) {
