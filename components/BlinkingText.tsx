@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const phrases = [
-  'canchas',
-  'clases',
+  'canchas deportivas',
+  'clases deportivas',
   'eventos deportivos',
   'comunidad',
   'experiencias'

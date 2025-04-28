@@ -98,6 +98,16 @@ export default function Header() {
                   </Link>
                 );
               })}
+              <Link
+                href="https://scplasenciac.github.io/fitmatch_v1/contact"
+                onClick={(e) => {
+                  handleNavigation(e, "https://scplasenciac.github.io/fitmatch_v1/contact");
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-center px-4 py-3 text-base font-semibold text-white bg-primary-700 hover:bg-primary-600 transition-colors"
+              >
+                Únete como partner
+              </Link>
             </nav>
           </div>
         </div>
