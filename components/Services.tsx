@@ -64,6 +64,9 @@ export default function Services() {
                 <p className="mt-4 text-center text-gray-600">
                   {service.description}
                 </p>
+                <button className="mt-6 rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600">
+                  {service.title}
+                </button>
               </motion.div>
             </Link>
           ))}

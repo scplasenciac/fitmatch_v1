@@ -2,7 +2,7 @@ import React from 'react';
 
 const plans = [
   {
-    name: 'Jugador Casual',
+    name: 'Jugador casual',
     price: 'Free',
     features: [
       { text: 'Reserva de canchas manual', included: true },
@@ -18,8 +18,8 @@ const plans = [
     buttonClass: 'bg-[#dfe6e9] text-[#2d3436]',
   },
   {
-    name: 'Atleta Activo',
-    price: 'S/14.99/mes',
+    name: 'Jugador activo',
+    price: '1 mes: S/. 14.99',
     features: [
       { text: 'Reserva de canchas manual', included: true },
       { text: 'Exploración de centros deportivos', included: true },
@@ -31,11 +31,11 @@ const plans = [
       { text: 'Ahorro por pago anticipado', included: false },
     ],
     buttonText: 'Suscribirme como Atleta Activo',
-    buttonClass: 'bg-[#ff7675] text-white',
+    buttonClass: 'bg-[#dfe6e9] text-[#2d3436]',
   },
   {
-    name: 'FitChampion',
-    price: 'S/59.99/6 meses',
+    name: 'Jugador top',
+    price: '12 meses: S/ 120 (S/ 10 al mes)',
     features: [
       { text: 'Reserva de canchas manual', included: true },
       { text: 'Exploración de centros deportivos', included: true },
@@ -47,8 +47,9 @@ const plans = [
       { text: 'Ahorro por pago anticipado', included: true },
     ],
     buttonText: 'Suscribirme como FitChampion',
-    buttonClass: 'bg-[#fab1a0] text-white',
+    buttonClass: 'bg-[#dfe6e9] text-[#2d3436]',
     highlighted: true,
+    savings: 'Ahorra S/ 60',
   },
 ];
 
@@ -56,7 +57,7 @@ const PricingPlans = () => {
   return (
     <section id="planes" className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">Planes y Precios</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">Únete a FitMatch</h2>
         
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -65,12 +66,15 @@ const PricingPlans = () => {
               key={plan.name}
               className={`rounded-2xl p-6 border-2 border-black ${
                 plan.highlighted 
-                  ? 'bg-[#ffeaa7] shadow-lg scale-105' 
+                  ? 'bg-white shadow-lg scale-105' 
                   : 'bg-white shadow'
               }`}
             >
               <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-              <p className="text-2xl font-bold mb-6">{plan.price}</p>
+              <p className="text-2xl font-bold mb-1">{plan.price}</p>
+              {plan.savings && (
+                <p className="text-red-600 font-semibold mb-4">{plan.savings}</p>
+              )}
               
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, index) => (
@@ -87,7 +91,7 @@ const PricingPlans = () => {
 
               <a 
                 href={`#suscripcion-${plan.name.toLowerCase().replace(' ', '-')}`}
-                className={`block w-full text-center px-5 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity ${plan.buttonClass}`}
+                className={`block w-full text-center px-5 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity whitespace-nowrap ${plan.buttonClass}`}
               >
                 {plan.buttonText}
               </a>

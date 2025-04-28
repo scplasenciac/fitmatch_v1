@@ -8,7 +8,7 @@ const phrases = [
   'clases deportivas',
   'eventos deportivos',
   'comunidad',
-  'experiencias'
+  'experiencias inolvidables'
 ]
 
 export default function BlinkingText() {
@@ -26,7 +26,7 @@ export default function BlinkingText() {
     <div className="h-[1.5em] flex items-center">
       <motion.span
         key={currentPhraseIndex}
-        className="text-red-600 inline-block"
+        className="text-red-600 inline-block whitespace-nowrap"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
