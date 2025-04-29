@@ -13,6 +13,12 @@ const tips = [
     description: 'Calcula tu IMC',
     icon: '⚖️',
   },
+  {
+    id: 3,
+    title: 'Recetas saludables',
+    description: 'Descubre opciones nutritivas y deliciosas',
+    icon: '🥗',
+  },
 ]
 
 export default function HealthTips() {
@@ -25,7 +31,7 @@ export default function HealthTips() {
           </h2>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {tips.map((tip) => (
             <div
               key={tip.id}

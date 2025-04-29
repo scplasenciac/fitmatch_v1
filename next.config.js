@@ -11,6 +11,10 @@ const nextConfig = {
   reactStrictMode: true,
   // Ensure proper handling of trailing slashes
   trailingSlash: true,
+  // Ensure proper handling of public directory
+  publicRuntimeConfig: {
+    staticFolder: process.env.NODE_ENV === 'production' ? '/fitmatch_v1' : '',
+  },
 }
 
 module.exports = nextConfig 

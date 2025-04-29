@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import BlinkingText from './BlinkingText'
+import { getImagePath } from '@/utils/imagePath'
 
 export default function Hero() {
   return (
@@ -51,15 +52,15 @@ export default function Hero() {
         {/* Image Section */}
         <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:mx-0 lg:mt-0 lg:max-w-none lg:flex-none">
           <motion.div 
-            className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-2xl"
+            className="w-full max-w-3xl flex-none sm:max-w-5xl lg:max-w-2xl"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <img
-              src="/fitmatch_v1/sports-collage.jpg"
+              src={getImagePath('sports-collage.jpg')}
               alt="Collage de deportes"
-              className="w-full h-auto rounded-2xl shadow-xl"
+              className="w-full h-auto object-contain rounded-2xl shadow-xl"
             />
           </motion.div>
         </div>

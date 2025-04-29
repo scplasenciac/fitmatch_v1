@@ -1,15 +1,18 @@
+'use client'
+
 import React from 'react';
 import { HiArrowNarrowRight } from 'react-icons/hi';
+import { getImagePath } from '@/utils/imagePath';
 
 export default function SportSuggestion() {
   return (
     <section className="w-full relative py-16 flex justify-center items-center min-h-[350px]">
       {/* Imagen de fondo */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <img
-          src="/deportes.jpg"
+          src={getImagePath('deportes.jpg')}
           alt="Deportes fondo"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center md:object-cover sm:object-contain"
         />
         {/* Overlay blanco translúcido */}
         <div className="absolute inset-0 bg-white opacity-70" />
