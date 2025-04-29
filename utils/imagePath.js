@@ -7,6 +7,11 @@ export function getImagePath(path) {
   // Remove leading slash if present
   const cleanPath = path.startsWith('/') ? path.substring(1) : path;
   
-  // Always use the path without the prefix in development
-  return `/${cleanPath}`;
+  // In development, use the path as is
+  if (process.env.NODE_ENV !== 'production') {
+    return `/${cleanPath}`;
+  }
+  
+  // In production, add the base path
+  return `/fitmatch_v1/${cleanPath}`;
 } 
