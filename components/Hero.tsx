@@ -44,7 +44,7 @@ export default function Hero() {
               href="#planes"
               className="rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
             >
-              Únete a nuestra comunidad
+              Únete a fitmatch
             </Link>
           </motion.div>
         </div>

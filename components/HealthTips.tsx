@@ -39,7 +39,7 @@ export default function HealthTips() {
               style={{ animationDelay: `${tip.id * 0.2}s` }}
             >
               <span className="text-4xl">{tip.icon}</span>
-              <h3 className="mt-6 text-xl font-semibold text-gray-900">
+              <h3 className="mt-6 text-xl font-semibold text-gray-900 text-center">
                 {tip.title}
               </h3>
               <p className="mt-4 text-center text-gray-600">
