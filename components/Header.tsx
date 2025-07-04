@@ -5,10 +5,26 @@ import Link from 'next/link'
 import { HiMenu, HiX, HiHome, HiBriefcase, HiLightBulb, HiHeart } from 'react-icons/hi'
 
 const navigation = [
-  { name: 'Inicio', href: 'https://scplasenciac.github.io/fitmatch_v1', icon: HiHome },
-  { name: 'Servicios', href: 'https://scplasenciac.github.io/fitmatch_v1#servicios', icon: HiBriefcase },
-  { name: 'Cómo funciona', href: 'https://scplasenciac.github.io/fitmatch_v1#como-funciona', icon: HiLightBulb },
-  { name: 'Tips saludables', href: 'https://scplasenciac.github.io/fitmatch_v1#tips', icon: HiHeart },
+  { 
+    name: 'Inicio', 
+    href: process.env.NODE_ENV === 'development' ? '/' : 'https://scplasenciac.github.io/fitmatch_v1', 
+    icon: HiHome 
+  },
+  { 
+    name: 'Servicios', 
+    href: process.env.NODE_ENV === 'development' ? '/#servicios' : 'https://scplasenciac.github.io/fitmatch_v1#servicios', 
+    icon: HiBriefcase 
+  },
+  { 
+    name: 'Cómo funciona', 
+    href: process.env.NODE_ENV === 'development' ? '/#como-funciona' : 'https://scplasenciac.github.io/fitmatch_v1#como-funciona', 
+    icon: HiLightBulb 
+  },
+  { 
+    name: 'Tips saludables', 
+    href: process.env.NODE_ENV === 'development' ? '/#tips' : 'https://scplasenciac.github.io/fitmatch_v1#tips', 
+    icon: HiHeart 
+  },
 ]
 
 export default function Header() {
@@ -19,11 +35,14 @@ export default function Header() {
     window.location.href = href
   }
 
+  const homeLink = process.env.NODE_ENV === 'development' ? '/' : 'https://scplasenciac.github.io/fitmatch_v1'
+  const contactLink = process.env.NODE_ENV === 'development' ? '/contact' : 'https://scplasenciac.github.io/fitmatch_v1/contact'
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-sm">
       <nav className="container mx-auto flex items-center justify-between py-6 px-4" aria-label="Global">
         <div className="flex lg:flex-1">
-          <Link href="https://scplasenciac.github.io/fitmatch_v1" className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
+          <Link href={homeLink} className="-m-1.5 p-1.5 text-2xl font-bold text-primary-700">
             FitMatch
           </Link>
         </div>
@@ -51,7 +70,7 @@ export default function Header() {
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
-            href="https://scplasenciac.github.io/fitmatch_v1/contact"
+            href={contactLink}
             className="rounded-full bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-600"
           >
             Únete como partner
@@ -99,9 +118,9 @@ export default function Header() {
                 );
               })}
               <Link
-                href="https://scplasenciac.github.io/fitmatch_v1/contact"
+                href={contactLink}
                 onClick={(e) => {
-                  handleNavigation(e, "https://scplasenciac.github.io/fitmatch_v1/contact");
+                  handleNavigation(e, contactLink);
                   setMobileMenuOpen(false);
                 }}
                 className="flex items-center justify-center px-4 py-3 text-base font-semibold text-white bg-primary-700 hover:bg-primary-600 transition-colors"

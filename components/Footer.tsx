@@ -4,12 +4,14 @@ import React from 'react'
 import Link from 'next/link'
 
 export default function Footer() {
+  const homeLink = process.env.NODE_ENV === 'development' ? '/' : 'https://scplasenciac.github.io/fitmatch_v1'
+
   return (
     <footer className="bg-white">
       <div className="container py-12 md:flex md:items-center md:justify-between">
         <div className="mt-8 md:order-1 md:mt-0">
           <Link 
-            href="https://scplasenciac.github.io/fitmatch_v1" 
+            href={homeLink}
             className="text-xl font-bold text-primary-700"
           >
             FitMatch

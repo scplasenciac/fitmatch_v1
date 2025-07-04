@@ -32,8 +32,12 @@ function SearchContent() {
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [selectedTime, setSelectedTime] = useState('')
+  const [selectedDistrict, setSelectedDistrict] = useState('')
+  const [selectedSport, setSelectedSport] = useState('')
   const [searchResults, setSearchResults] = useState<Activity[]>([])
   const [isSearching, setIsSearching] = useState(false)
+  const [selectedCourt, setSelectedCourt] = useState<Activity | null>(null)
+  const [showAvailability, setShowAvailability] = useState(false)
 
   const categories = {
     clases: [
@@ -50,8 +54,26 @@ function SearchContent() {
       { id: 'torneo-futbol', name: 'Torneo de Fútbol' },
       { id: 'torneo-tennis', name: 'Torneo de Tennis' },
       { id: 'torneo-volley', name: 'Torneo de Volley' }
+    ],
+    alquileres: [
+      { id: 'futbol', name: 'Fútbol' },
+      { id: 'tennis', name: 'Tennis' },
+      { id: 'volley', name: 'Volley' },
+      { id: 'basquet', name: 'Básquet' },
+      { id: 'paddle', name: 'Paddle' },
+      { id: 'futbol-sala', name: 'Fútbol Sala' }
     ]
   }
+
+  const limaDistricts = [
+    'Miraflores', 'San Isidro', 'Lince', 'Jesús María', 'Magdalena del Mar',
+    'San Miguel', 'Pueblo Libre', 'Breña', 'La Victoria', 'San Borja',
+    'Surco', 'San Juan de Miraflores', 'Villa María del Triunfo', 'Villa El Salvador',
+    'Chorrillos', 'Barranco', 'Santiago de Surco', 'San Luis', 'Ate', 'La Molina',
+    'Chaclacayo', 'Cieneguilla', 'Santa Anita', 'El Agustino', 'San Martín de Porres',
+    'Los Olivos', 'Comas', 'Carabayllo', 'Puente Piedra', 'Ancón', 'Santa Rosa',
+    'Ventanilla', 'Callao', 'Bellavista', 'La Perla', 'La Punta', 'Carmen de la Legua'
+  ]
 
   const timeSlots = [
     '08:00', '09:00', '10:00', '11:00', '12:00',
@@ -71,8 +93,8 @@ function SearchContent() {
   }
 
   const handleSearch = () => {
-    if (!selectedDate || !selectedTime) {
-      alert('Por favor selecciona una fecha y hora')
+    if (!selectedDistrict || !selectedSport) {
+      alert('Por favor selecciona un distrito y un deporte')
       return
     }
 
@@ -91,7 +113,7 @@ function SearchContent() {
             price: 30,
             available: true,
             instructor: 'Juan Pérez',
-            location: 'Centro Deportivo Principal'
+            location: `Centro Deportivo Principal - ${selectedDistrict}`
           },
           {
             id: '2',
@@ -100,7 +122,7 @@ function SearchContent() {
             price: 45,
             available: true,
             instructor: 'María García',
-            location: 'Centro Deportivo Premium'
+            location: `Centro Deportivo Premium - ${selectedDistrict}`
           }
         ]
       } else if (type === 'eventos') {
@@ -112,7 +134,7 @@ function SearchContent() {
             price: 50,
             available: true,
             date: selectedDate.toLocaleDateString(),
-            location: 'Estadio Municipal'
+            location: `Estadio Municipal - ${selectedDistrict}`
           },
           {
             id: '2',
@@ -121,18 +143,67 @@ function SearchContent() {
             price: 75,
             available: true,
             date: selectedDate.toLocaleDateString(),
-            location: 'Complejo Deportivo Central'
+            location: `Complejo Deportivo Central - ${selectedDistrict}`
           }
         ]
+      } else {
+        // Default case for alquileres (court rentals)
+        const courtNames = [
+          `Cancha de ${selectedSport} - Complejo A`,
+          `Cancha de ${selectedSport} - Complejo B`,
+          `Cancha de ${selectedSport} - Centro Deportivo`,
+          `Cancha de ${selectedSport} - Club Deportivo`
+        ]
+        
+        mockResults = courtNames.map((courtName, index) => ({
+          id: `${index + 1}`,
+          name: courtName,
+          description: `Cancha profesional de ${selectedSport.toLowerCase()} con medidas oficiales`,
+          price: 100, // Fixed price of S/. 100
+          available: true,
+          date: '',
+          location: `${courtName} - ${selectedDistrict}`
+        }))
       }
       
       setSearchResults(mockResults)
       setIsSearching(false)
+      
+      // Scroll to results section after a short delay
+      setTimeout(() => {
+        const resultsSection = document.getElementById('results-section')
+        if (resultsSection) {
+          resultsSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          })
+        }
+      }, 100)
     }, 1000)
   }
 
-  const handleReserve = (activityId: string) => {
-    alert(`Reservando ${type === 'clases' ? 'clase' : 'evento'} ${activityId} para ${selectedDate.toLocaleDateString()} a las ${selectedTime}`)
+  const handleCourtSelection = (court: Activity) => {
+    setSelectedCourt(court)
+    setShowAvailability(true)
+    
+    // Scroll to availability section after a short delay to ensure it's rendered
+    setTimeout(() => {
+      const availabilitySection = document.getElementById('availability-section')
+      if (availabilitySection) {
+        availabilitySection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }
+    }, 100)
+  }
+
+  const handleReserve = () => {
+    if (!selectedCourt || !selectedDate || !selectedTime) {
+      alert('Por favor selecciona una fecha y hora')
+      return
+    }
+    alert(`Reservando ${selectedCourt.name} para ${selectedDate.toLocaleDateString()} a las ${selectedTime}`)
   }
 
   return (
@@ -156,60 +227,42 @@ function SearchContent() {
             <div className="mt-16 max-w-2xl mx-auto">
               <div className="bg-white rounded-2xl shadow-lg p-8">
                 <div className="space-y-8">
-                  {/* Category Selection */}
-                  {(type === 'clases' || type === 'eventos') && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-4">
-                        {type === 'clases' ? 'Seleccionar Clase' : 'Seleccionar Evento'}
-                      </label>
-                      <div className="grid grid-cols-2 gap-4">
-                        {categories[type as keyof typeof categories].map((category) => (
-                          <button
-                            key={category.id}
-                            onClick={() => setSelectedCategory(category.id)}
-                            className={`px-4 py-3 rounded-md text-sm font-medium transition-colors ${
-                              selectedCategory === category.id
-                                ? 'bg-primary-600 text-white'
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                            }`}
-                          >
-                            {category.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Date Selection */}
+                  {/* District Selection */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Fecha
+                      Distrito
                     </label>
-                    <input
-                      type="date"
-                      value={selectedDate.toISOString().split('T')[0]}
-                      onChange={(e) => setSelectedDate(new Date(e.target.value))}
+                    <select
+                      value={selectedDistrict}
+                      onChange={(e) => setSelectedDistrict(e.target.value)}
                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-                    />
+                    >
+                      <option value="">Selecciona un distrito</option>
+                      {limaDistricts.map((district) => (
+                        <option key={district} value={district}>
+                          {district}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
-                  {/* Time Selection */}
+                  {/* Sport Selection */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Hora
+                      Deporte
                     </label>
-                    <div className="mt-2 grid grid-cols-4 gap-2">
-                      {timeSlots.map((time) => (
+                    <div className="mt-2 grid grid-cols-2 gap-3">
+                      {categories.alquileres.map((sport) => (
                         <button
-                          key={time}
-                          onClick={() => setSelectedTime(time)}
-                          className={`px-4 py-2 rounded-md text-sm font-medium ${
-                            selectedTime === time
+                          key={sport.id}
+                          onClick={() => setSelectedSport(sport.id)}
+                          className={`px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                            selectedSport === sport.id
                               ? 'bg-primary-600 text-white'
                               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                           }`}
                         >
-                          {time}
+                          {sport.name}
                         </button>
                       ))}
                     </div>
@@ -223,7 +276,7 @@ function SearchContent() {
                       disabled={isSearching}
                       className="w-full rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isSearching ? 'Buscando...' : 'Buscar disponibilidad'}
+                      {isSearching ? 'Buscando...' : 'Buscar canchas'}
                     </button>
                   </div>
                 </div>
@@ -231,35 +284,128 @@ function SearchContent() {
 
               {/* Results Section */}
               {searchResults.length > 0 && (
-                <div className="mt-16">
+                <div id="results-section" className="mt-16">
                   <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                    {type === 'clases' ? 'Clases disponibles' : 'Eventos disponibles'}
+                    Canchas de {selectedSport} en {selectedDistrict}
                   </h2>
-                  <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {searchResults.map((activity) => (
-                      <div key={activity.id} className="rounded-2xl bg-white p-8 shadow-lg">
-                        <h3 className="text-xl font-semibold text-gray-900">{activity.name}</h3>
-                        <p className="mt-4 text-gray-600">{activity.description}</p>
-                        {activity.instructor && (
-                          <p className="mt-2 text-sm text-gray-500">Instructor: {activity.instructor}</p>
-                        )}
-                        {activity.date && (
-                          <p className="mt-2 text-sm text-gray-500">Fecha: {activity.date}</p>
-                        )}
-                        {activity.location && (
-                          <p className="mt-2 text-sm text-gray-500">Ubicación: {activity.location}</p>
-                        )}
-                        <div className="mt-4 flex items-center justify-between">
-                          <span className="text-primary-700 font-semibold">${activity.price}</span>
-                          <button 
-                            onClick={() => handleReserve(activity.id)}
-                            className="rounded-full bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-600"
-                          >
-                            {type === 'clases' ? 'Reservar clase' : 'Inscribirse'}
-                          </button>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Courts List - Left Side */}
+                    <div className="space-y-4 max-h-[600px] overflow-y-auto pr-4">
+                      {searchResults.map((activity) => (
+                        <div key={activity.id} className="rounded-xl bg-white p-4 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+                          <div className="flex flex-col h-full">
+                            <div className="flex-1">
+                              <h3 className="text-lg font-semibold text-gray-900 mb-2">{activity.name}</h3>
+                              <p className="text-sm text-gray-600 mb-3">{activity.description}</p>
+                              {activity.location && (
+                                <p className="text-xs text-gray-500 mb-3">📍 {activity.location}</p>
+                              )}
+                              <div className="flex items-center justify-between">
+                                <span className="text-lg font-bold text-primary-700">S/. {activity.price}</span>
+                                <button 
+                                  onClick={() => handleCourtSelection(activity)}
+                                  className="rounded-full bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 transition-colors"
+                                >
+                                  Seleccionar cancha
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Map - Right Side */}
+                    <div className="bg-gray-100 rounded-2xl p-6 h-[600px] flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-6xl mb-4">🗺️</div>
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">Mapa de Canchas</h3>
+                        <p className="text-gray-600">
+                          Aquí se mostrará el mapa interactivo con las ubicaciones de las canchas en {selectedDistrict}
+                        </p>
+                        <div className="mt-4 p-3 bg-white rounded-lg shadow-sm">
+                          <p className="text-sm text-gray-700">
+                            <strong>Canchas encontradas:</strong> {searchResults.length}
+                          </p>
+                          <p className="text-sm text-gray-700">
+                            <strong>Distrito:</strong> {selectedDistrict}
+                          </p>
+                          <p className="text-sm text-gray-700">
+                            <strong>Deporte:</strong> {selectedSport}
+                          </p>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Availability Section */}
+              {showAvailability && selectedCourt && (
+                <div id="availability-section" className="mt-16">
+                  <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h2 className="text-2xl font-bold text-gray-900">Verificar disponibilidad</h2>
+                        <p className="text-gray-600 mt-2">{selectedCourt.name}</p>
+                      </div>
+                      <button
+                        onClick={() => setShowAvailability(false)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        ✕
+                      </button>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      {/* Date Selection */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                          Fecha
+                        </label>
+                        <input
+                          type="date"
+                          value={selectedDate.toISOString().split('T')[0]}
+                          onChange={(e) => setSelectedDate(new Date(e.target.value))}
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                        />
+                      </div>
+
+                      {/* Time Selection */}
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                          Hora
+                        </label>
+                        <div className="mt-2 grid grid-cols-4 gap-2">
+                          {timeSlots.map((time) => (
+                            <button
+                              key={time}
+                              onClick={() => setSelectedTime(time)}
+                              className={`px-4 py-2 rounded-md text-sm font-medium ${
+                                selectedTime === time
+                                  ? 'bg-primary-600 text-white'
+                                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                              }`}
+                            >
+                              {time}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Reserve Button */}
+                      <div>
+                        <button
+                          type="button"
+                          onClick={handleReserve}
+                          disabled={!selectedDate || !selectedTime}
+                          className="w-full rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          Reservar cancha - S/. {selectedCourt.price}
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
