@@ -2,6 +2,7 @@
 
 import React, { useState, Suspense } from 'react'
 import Header from '@/components/Header'
+import PaymentGateway from '@/components/PaymentGateway'
 import { useSearchParams } from 'next/navigation'
 
 interface Activity {
@@ -38,6 +39,14 @@ function SearchContent() {
   const [isSearching, setIsSearching] = useState(false)
   const [selectedCourt, setSelectedCourt] = useState<Activity | null>(null)
   const [showAvailability, setShowAvailability] = useState(false)
+  const [showPayment, setShowPayment] = useState(false)
+  const [reservationData, setReservationData] = useState<{
+    courtName: string
+    date: string
+    time: string
+    price: number
+    location: string
+  } | null>(null)
 
   const categories = {
     clases: [
@@ -66,13 +75,13 @@ function SearchContent() {
   }
 
   const limaDistricts = [
-    'Miraflores', 'San Isidro', 'Lince', 'Jesús María', 'Magdalena del Mar',
-    'San Miguel', 'Pueblo Libre', 'Breña', 'La Victoria', 'San Borja',
-    'Surco', 'San Juan de Miraflores', 'Villa María del Triunfo', 'Villa El Salvador',
-    'Chorrillos', 'Barranco', 'Santiago de Surco', 'San Luis', 'Ate', 'La Molina',
-    'Chaclacayo', 'Cieneguilla', 'Santa Anita', 'El Agustino', 'San Martín de Porres',
-    'Los Olivos', 'Comas', 'Carabayllo', 'Puente Piedra', 'Ancón', 'Santa Rosa',
-    'Ventanilla', 'Callao', 'Bellavista', 'La Perla', 'La Punta', 'Carmen de la Legua'
+    'Ancón', 'Ate', 'Barranco', 'Bellavista', 'Breña', 'Callao', 'Carmen de la Legua',
+    'Carabayllo', 'Cercado de Lima', 'Chaclacayo', 'Chorrillos', 'Cieneguilla',
+    'Comas', 'El Agustino', 'Jesús María', 'La Molina', 'La Perla', 'La Punta',
+    'La Victoria', 'Lince', 'Los Olivos', 'Magdalena del Mar', 'Miraflores',
+    'Pueblo Libre', 'Puente Piedra', 'San Borja', 'San Isidro', 'San Juan de Miraflores',
+    'San Luis', 'San Martín de Porres', 'San Miguel', 'Santa Anita', 'Santa Rosa',
+    'Santiago de Surco', 'Surco', 'Ventanilla', 'Villa El Salvador', 'Villa María del Triunfo'
   ]
 
   const timeSlots = [
@@ -203,7 +212,18 @@ function SearchContent() {
       alert('Por favor selecciona una fecha y hora')
       return
     }
-    alert(`Reservando ${selectedCourt.name} para ${selectedDate.toLocaleDateString()} a las ${selectedTime}`)
+    
+    // Preparar datos de la reserva para la pasarela de pago
+    setReservationData({
+      courtName: selectedCourt.name,
+      date: selectedDate.toLocaleDateString(),
+      time: selectedTime,
+      price: selectedCourt.price,
+      location: selectedCourt.location || 'Ubicación no especificada'
+    })
+    
+    // Abrir pasarela de pago
+    setShowPayment(true)
   }
 
   return (
@@ -413,6 +433,13 @@ function SearchContent() {
           </div>
         </section>
       </div>
+      
+      {/* Payment Gateway */}
+      <PaymentGateway 
+        isOpen={showPayment}
+        onClose={() => setShowPayment(false)}
+        reservationData={reservationData}
+      />
     </main>
   )
 } 

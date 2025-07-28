@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { HiMenu, HiX, HiHome, HiBriefcase, HiLightBulb, HiHeart } from 'react-icons/hi'
+import { HiMenu, HiX, HiHome, HiBriefcase, HiLightBulb, HiHeart, HiUser } from 'react-icons/hi'
 
 const navigation = [
   { 
@@ -68,12 +68,19 @@ export default function Header() {
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:space-x-4">
           <Link
             href={contactLink}
             className="rounded-full bg-primary-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-600"
           >
             Únete como partner
+          </Link>
+          <Link
+            href={process.env.NODE_ENV === 'development' ? '/profile' : 'https://scplasenciac.github.io/fitmatch_v1/profile'}
+            className="rounded-full bg-gray-100 p-2 text-gray-700 hover:bg-gray-200 transition-colors"
+            title="Mi Perfil"
+          >
+            <HiUser className="h-5 w-5" />
           </Link>
         </div>
       </nav>
@@ -127,10 +134,19 @@ export default function Header() {
               >
                 Únete como partner
               </Link>
+              <Link
+                href={process.env.NODE_ENV === 'development' ? '/profile' : 'https://scplasenciac.github.io/fitmatch_v1/profile'}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center px-4 py-3 text-base font-semibold text-white hover:bg-primary-600 transition-colors"
+              >
+                <HiUser className="mr-3 text-lg" />
+                Mi Perfil
+              </Link>
             </nav>
           </div>
         </div>
       )}
+      
     </header>
   )
 } 
