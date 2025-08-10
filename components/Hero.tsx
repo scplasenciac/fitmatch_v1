@@ -41,10 +41,10 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Link
-              href="#planes"
+              href="#servicios"
               className="rounded-full bg-primary-700 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700"
             >
-              Únete a fitmatch
+              Reserva ahora
             </Link>
           </motion.div>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Hero from '@/components/Hero'
+import FitMatchIntro from '@/components/FitMatchIntro'
 import Services from '@/components/Services'
 import HowItWorks from '@/components/HowItWorks'
 import HealthTips from '@/components/HealthTips'
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
+      <FitMatchIntro />
       <Services />
       <HowItWorks />
       <HealthTips />

@@ -19,10 +19,10 @@ export default function CallToAction() {
             Únete a nuestra comunidad deportiva y descubre todas las oportunidades que tenemos para ti.
           </p>
           <Link
-            href="/contact"
+            href="#servicios"
             className="inline-block rounded-full bg-primary-700 px-8 py-4 text-lg font-semibold text-white shadow-sm hover:bg-primary-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 transition-colors"
           >
-            Contáctanos ahora
+            Reservar ahora
           </Link>
         </div>
       </div>
